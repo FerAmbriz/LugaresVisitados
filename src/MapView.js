@@ -1,12 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
 import './App.css';
 
-function MapView({ user }) {
+function MapView({ user, onLogout }) {
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
-  const popupRef = useRef(null);
 
   useEffect(() => {
     mapRef.current = new maplibregl.Map({
@@ -31,42 +29,35 @@ function MapView({ user }) {
           },
         ],
       },
-      center: [-99.15, 19.39],
-      zoom: 12,
+      center: [-99.186, 19.332],
+      zoom: 14,
       maxZoom: 19,
     });
 
     mapRef.current.on('load', () => {
-      const geojsonData = {
-        type: 'FeatureCollection',
-        features: [
-          {
-            type: 'Feature',
-            geometry: { type: 'Point', coordinates: [-99.186, 19.332] },
-            properties: { title: 'Ciudad Universitaria' },
-          },
-          {
-            type: 'Feature',
-            geometry: { type: 'Point', coordinates: [-99.1332, 19.4326] },
-            properties: { title: 'Zócalo CDMX' },
-          },
-          {
-            type: 'Feature',
-            geometry: { type: 'Point', coordinates: [-99.1617, 19.3467] },
-            properties: { title: 'Coyoacán' },
-          },
-        ],
-      };
-
-      mapRef.current.addSource('points-source', {
+      mapRef.current.addSource('cu-point', {
         type: 'geojson',
-        data: geojsonData,
+        data: {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: [-99.186, 19.332] },
+              properties: { title: 'Ciudad Universitaria' },
+            },
+            {
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: [-99.18, 19.34] },
+              properties: { title: 'Otro Punto' },
+            },
+          ],
+        },
       });
 
       mapRef.current.addLayer({
-        id: 'points-layer',
+        id: 'cu-layer',
         type: 'circle',
-        source: 'points-source',
+        source: 'cu-point',
         paint: {
           'circle-radius': 8,
           'circle-color': '#FF5722',
@@ -75,19 +66,13 @@ function MapView({ user }) {
         },
       });
 
-      mapRef.current.on('click', 'points-layer', (e) => {
+      mapRef.current.on('click', 'cu-layer', (e) => {
         if (e.features.length > 0) {
           const feature = e.features[0];
           const coordinates = feature.geometry.coordinates.slice();
           const title = feature.properties.title;
 
-          if (popupRef.current) popupRef.current.remove();
-
-          popupRef.current = new maplibregl.Popup({
-            closeButton: true,
-            closeOnClick: false,
-            anchor: 'top',
-          })
+          new maplibregl.Popup({ closeButton: false, closeOnClick: false, anchor: 'top' })
             .setLngLat(coordinates)
             .setHTML(
               `<div style="background:#333; color:#fff; padding:5px 10px; border-radius:4px; font-size:12px;">
@@ -98,23 +83,25 @@ function MapView({ user }) {
         }
       });
 
-      mapRef.current.on('mouseenter', 'points-layer', () => {
+      mapRef.current.on('mouseenter', 'cu-layer', () => {
         mapRef.current.getCanvas().style.cursor = 'pointer';
       });
 
-      mapRef.current.on('mouseleave', 'points-layer', () => {
+      mapRef.current.on('mouseleave', 'cu-layer', () => {
         mapRef.current.getCanvas().style.cursor = '';
+        document.querySelectorAll('.mapboxgl-popup').forEach((p) => p.remove());
       });
     });
 
-    return () => {
-      mapRef.current?.remove();
-    };
+    return () => mapRef.current?.remove();
   }, []);
 
   return (
     <>
-      <div className="welcome">Bienvenido, {user} 👋</div>
+      <div className="top-bar">
+        <span>Bienvenido, {user}</span>
+        <button className="logout-button" onClick={onLogout}>Cerrar sesión</button>
+      </div>
       <div ref={mapContainer} style={{ width: '100%', height: '100vh' }} />
     </>
   );

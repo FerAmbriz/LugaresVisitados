@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       {user ? (
-        <MapView user={user} />
+        <MapView user={user} onLogout={() => setUser(null)} />
       ) : (
         <Login onLogin={setUser} />
       )}
