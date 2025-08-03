@@ -146,13 +146,18 @@ function MapView({ user, onLogout }) {
 
       <div className="map-container" ref={mapContainer} />
 
-      {selectedFeature && (
-        <div className="info-panel">
-          <h2>{selectedFeature.title}</h2>
-          <img src={selectedFeature.image} alt={selectedFeature.title} />
-          <p>{selectedFeature.description}</p>
-        </div>
-      )}
+      <div className="info-panel">
+        {selectedFeature ? (
+          <>
+            <h2>{selectedFeature.title}</h2>
+            <img src={selectedFeature.image} alt={selectedFeature.title} />
+            <p>{selectedFeature.description}</p>
+          </>
+        ) : (
+          <p>Haz clic en un punto del mapa para ver la información.</p>
+        )}
+      </div>
+
     </div>
   );
 }
