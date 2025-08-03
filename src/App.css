@@ -1,98 +1,112 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #121212;
-  color: #f1f1f1;
-}
-
-#root {
-  height: 100vh;
-}
-
-.login-container {
+/* Fondo oscuro con una montaña minimalista */
+.login-page {
+  min-height: 100vh;
+  background-color: #0d1117;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 400' preserveAspectRatio='xMidYMax slice'%3E%3Cpath d='M0,300 C300,200 600,400 900,300 C1200,200 1500,400 1920,250 L1920,400 L0,400 Z' fill='rgba(88,166,255,0.2)' stroke='%2358a6ff' stroke-width='2'/%3E%3Cpath d='M0,350 C400,250 800,450 1200,350 C1500,250 1800,450 1920,300 L1920,400 L0,400 Z' fill='rgba(88,166,255,0.1)' stroke='%2358a6ff' stroke-width='1.5'/%3E%3C/svg%3E"),
+    url('https://www.transparenttextures.com/patterns/mountain-path.png');
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-position: bottom left, center bottom;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  align-items: center;
+  padding: 2rem;
+  color: #ffffff;
 }
 
-.login-card.dark {
-  background: #1e1e1e;
-  padding: 40px 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  width: 320px;
+
+
+.page-title {
   text-align: center;
-  animation: fadeIn 0.5s ease-in-out;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  background: rgba(13, 17, 23, 0.7); /* fondo oscuro translúcido */
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  color: #f0f6fc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 2px #000;
 }
 
-.login-card h2 {
-  margin-bottom: 20px;
-  color: #f1f1f1;
+
+/* Contenedor del login */
+.login-container {
+  background: rgba(0, 0, 0, 0.6); /* Transparencia para ver algo del fondo */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-.login-form {
+/* Sección que contiene imagen y formulario */
+.login-content {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Imagen lateral */
+.login-image img {
+  max-width: 200px;
+  border-radius: 0.5rem;
+}
+
+/* Tarjeta del formulario */
+.login-card {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #161b22;
+  flex: 1;
+}
+
+/* Texto y elementos del formulario */
+.login-card h2,
+.login-card p,
+.login-card label {
+  color: #c9d1d9;
 }
 
 .login-form input {
-  padding: 10px 12px;
-  border: 1px solid #444;
-  border-radius: 8px;
-  font-size: 14px;
-  background-color: #2c2c2c;
-  color: #f1f1f1;
-  transition: border 0.3s, background-color 0.3s;
-}
-
-.login-form input::placeholder {
-  color: #aaa;
-}
-
-.login-form input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
-  background-color: #333;
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #0d1117;
+  color: #ffffff;
 }
 
 .login-form button {
-  padding: 10px;
-  background-color: #667eea;
-  border: none;
-  border-radius: 8px;
+  background-color: #238636;
   color: white;
-  font-size: 15px;
-  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .login-form button:hover {
-  background-color: #556cd6;
+  background-color: #2ea043;
 }
 
 .error {
-  color: #ff4d4d;
-  font-size: 13px;
-  margin-top: 5px;
-  text-align: center;
+  color: #ff6b6b;
+  margin-top: 0.5rem;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.login-footer-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
 }
+
+.login-footer-text a {
+  color: #58a6ff;
+  text-decoration: underline;
+}
+
 
 .welcome {
   position: absolute;
@@ -138,3 +152,60 @@ body {
   background-color: #cc0000;
 }
 
+.error {
+  color: #ff4d4d;
+  font-size: 13px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.map-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+
+.map-container {
+  flex: 1;
+}
+
+
+.info-panel {
+  width: 300px;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 16px;
+  overflow-y: auto;
+  border-left: 2px solid #333;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.info-panel h2 {
+  margin-top: 0;
+}
+
+.info-panel img {
+  width: 100%;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+.info-panel p {
+  font-size: 14px;
+  line-height: 1.5;
+}
