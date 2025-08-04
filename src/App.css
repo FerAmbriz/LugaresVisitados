@@ -2,9 +2,6 @@
 .login-page {
   min-height: 100vh;
   background-color: #0d1117;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 400' preserveAspectRatio='xMidYMax slice'%3E%3Cpath d='M0,300 C300,200 600,400 900,300 C1200,200 1500,400 1920,250 L1920,400 L0,400 Z' fill='rgba(88,166,255,0.2)' stroke='%2358a6ff' stroke-width='2'/%3E%3Cpath d='M0,350 C400,250 800,450 1200,350 C1500,250 1800,450 1920,300 L1920,400 L0,400 Z' fill='rgba(88,166,255,0.1)' stroke='%2358a6ff' stroke-width='1.5'/%3E%3C/svg%3E"),
-    url('https://www.transparenttextures.com/patterns/mountain-path.png');
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
   background-position: bottom left, center bottom;
